@@ -6,7 +6,7 @@ import Addusers from "./Addusers";
 const Home = () => {
   const dispatch = useDispatch();
   const { users, editUser } = useSelector((state) => state.data);
-  console.log(users);
+
   const handleDelete = (index) => {
     dispatch(deleteUserData(index));
   };
@@ -30,12 +30,15 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {users && users.length === 0 ?  <tr>
+            {users && users.length === 0 ? (
+              <tr>
                 <td colSpan="5" className="text-center">
                   No User Data Found..
                 </td>
               </tr>
-              : (users.map((user, i) => {
+            ) : (
+              users &&
+              users.map((user, i) => {
                 return (
                   <tr key={user.id}>
                     <td>{user.name}</td>
@@ -58,7 +61,8 @@ const Home = () => {
                     </td>
                   </tr>
                 );
-              }))}
+              })
+            )}
           </tbody>
         </table>
       </div>

@@ -8,7 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 const Addusers = ({ editUser }) => {
   const dispatch = useDispatch();
   let UpdateUSer = editUser || [];
-
   let initialValues = "";
 
   useEffect(() => {
@@ -36,7 +35,6 @@ const Addusers = ({ editUser }) => {
     initialValues: initialValues,
     validationSchema: addUserValidation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
       if (editUser.length > 0) {
         dispatch(addUserData(values, values.id, { type: "Update" }));
       } else {

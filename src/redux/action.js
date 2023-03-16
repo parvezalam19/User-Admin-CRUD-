@@ -1,7 +1,7 @@
 import * as types from "./actionType";
 
 export const addUserData = (data, id,type) => {
-  console.log(data);
+  console.log("data",data);
   return {
     type: types.ADD_USER_DATA,
     payload: { data, id ,type},

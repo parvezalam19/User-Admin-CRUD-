@@ -8,16 +8,14 @@ const initialValue = {
 const userReducer = (state = initialValue, action) => {
   switch (action.type) {
     case types.ADD_USER_DATA:
-      console.log(action.payload.type.type);
       let newData = [action.payload.data, ...state.users];
-      console.log(newData)
       let updatedData = state.users.map((item, i) => {
         return item.id === action.payload.id ? action.payload.data : item;
       });
       return {
         ...state,
         users: action.payload.type.type === "Add" ? newData : updatedData,
-        editUser : []
+        editUser: [],
       };
     case types.DELETE_USERS_DATA:
       return {
