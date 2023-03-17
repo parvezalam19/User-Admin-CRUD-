@@ -2,6 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import rootReducer from "./rootreducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const persistConfig = {
   key: "persist-key",
@@ -11,7 +12,7 @@ const persistConfig = {
 const persistReducers = persistReducer(persistConfig, rootReducer);
 
 
-const store = createStore(persistReducers);
+const store = createStore(persistReducers , composeWithDevTools());
 
 export const persistor = persistStore(store);
 export default store;

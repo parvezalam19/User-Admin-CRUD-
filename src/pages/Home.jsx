@@ -34,7 +34,7 @@ const Home = () => {
                   No User Data Found..
                 </td>
               </tr>
-              : (users.map((user, i) => {
+              : (users && users.map((user, i) => {
                 return (
                   <tr key={user.id}>
                     <td>{user.name}</td>
