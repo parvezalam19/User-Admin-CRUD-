@@ -6,7 +6,6 @@ import Addusers from "./Addusers";
 const Home = () => {
   const dispatch = useDispatch();
   const { users, editUser } = useSelector((state) => state.data);
-  console.log(users);
   const handleDelete = (index) => {
     dispatch(deleteUserData(index));
   };
