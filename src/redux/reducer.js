@@ -3,34 +3,38 @@ import * as types from "./actionType";
 const initialValue = {
   users: [],
   editUser: [],
+  loading: false,
+  error: null,
 };
 
 const userReducer = (state = initialValue, action) => {
   switch (action.type) {
-    case types.ADD_USER_DATA:
-      console.log(action.payload.type.type);
-      let newData = [action.payload.data, ...state.users];
-      console.log(newData)
-      let updatedData = state.users.map((item, i) => {
-        return item.id === action.payload.id ? action.payload.data : item;
-      });
+    case types.LOAD_USER_START:
+    case types.CREATE_USER_START:
       return {
         ...state,
-        users: action.payload.type.type === "Add" ? newData : updatedData,
-        editUser : []
+        loading: true,
       };
-    case types.DELETE_USERS_DATA:
+    case types.LOAD_USER_SUCCESS:
       return {
         ...state,
-        users: state.users.filter((user, i) => user.id !== action.payload),
+        loading: false,
+        users: action.payload,
       };
-    case types.UPDATE_USER_DATA:
-      console.log(state.users);
+    case types.CREATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
 
+    case types.LOAD_USER_ERROR:
+    case types.CREATE_USER_ERROR:
       return {
         ...state,
-        editUser: state.users.filter((item, i) => item.id === action.payload),
+        loading: false,
+        error: action.payload,
       };
+
     default:
       return state;
   }

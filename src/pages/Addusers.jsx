@@ -1,47 +1,30 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUserData } from "../redux/action";
 import { addUserValidation } from "../schemas";
 import { v4 as uuidv4 } from "uuid";
+import { createUserStart,loadUserStart } from "../redux/action";
 
 const Addusers = ({ editUser }) => {
   const dispatch = useDispatch();
   let UpdateUSer = editUser || [];
 
-  let initialValues = "";
-
-  useEffect(() => {
-    if (editUser && editUser.length > 0) {
-      initialValues = {
-        id: UpdateUSer[0].id ? UpdateUSer[0].id : uuidv4(),
-        name: UpdateUSer[0].name ? UpdateUSer[0].name : "",
-        DOB: UpdateUSer[0].DOB ? UpdateUSer[0].DOB : "",
-        gender: UpdateUSer[0].gender ? UpdateUSer[0].gender : "",
-        Biodata: UpdateUSer[0].Biodata ? UpdateUSer[0].Biodata : "",
-      };
-    } else {
-      initialValues = {
-        id: uuidv4(),
-        name: "",
-        DOB: "",
-        gender: "",
-        Biodata: "",
-      };
-    }
-    formik.setValues(initialValues);
-  }, [editUser]);
+  const initialValues = {
+    id: uuidv4(),
+    name: "",
+    DOB: "",
+    gender: "",
+    Biodata: "",
+  };
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: addUserValidation,
     onSubmit: (values, { resetForm }) => {
       console.log(values);
-      if (editUser.length > 0) {
-        dispatch(addUserData(values, values.id, { type: "Update" }));
-      } else {
-        dispatch(addUserData(values, values.id, { type: "Add" }));
-      }
+      dispatch(createUserStart(values));
+      dispatch(loadUserStart());
+
       resetForm({
         values: {
           name: "",

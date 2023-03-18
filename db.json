@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Parvez Alam",
+      "DOB": "1996/02/12",
+      "gender": "Male",
+      "Biodata": "Developer"
+    },
+    {
+      "id": 2,
+      "name": "Rahul",
+      "DOB": "1994/02/12",
+      "gender": "Male",
+      "Biodata": "Node Developer"
+    }
+    
+  ]
+}

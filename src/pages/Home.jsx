@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserData, updateUserData } from "../redux/action";
+import { loadUserStart } from "../redux/action";
 import Addusers from "./Addusers";
+import Spinner from "react-bootstrap/Spinner";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { users, editUser } = useSelector((state) => state.data);
+  const { users, editUser, loading } = useSelector((state) => state.data);
+  useEffect(() => {
+    dispatch(loadUserStart());
+  },[]);
+
   const handleDelete = (index) => {
-    dispatch(deleteUserData(index));
+    // dispatch(deleteUserData(index));
   };
   const handleEdit = (index) => {
-    dispatch(updateUserData(index));
+    // dispatch(updateUserData(index));
   };
   return (
     <div className="row table_container">
@@ -29,12 +34,15 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {users && users.length === 0 ?  <tr>
+            {loading ? (
+              <tr>
                 <td colSpan="5" className="text-center">
-                  No User Data Found..
+                <Spinner animation="border" variant="primary" />
                 </td>
               </tr>
-              : (users && users.map((user, i) => {
+            ) : (
+              users &&
+              users.map((user, i) => {
                 return (
                   <tr key={user.id}>
                     <td>{user.name}</td>
@@ -57,7 +65,8 @@ const Home = () => {
                     </td>
                   </tr>
                 );
-              }))}
+              })
+            )}
           </tbody>
         </table>
       </div>
