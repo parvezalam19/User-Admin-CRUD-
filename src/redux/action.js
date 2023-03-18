@@ -1,8 +1,6 @@
 import * as types from "./actionType";
 
-
-// load users data on reload page 
-
+// load users data on reload page
 
 export const loadUserStart = () => {
   return {
@@ -24,9 +22,7 @@ export const loadUserError = (error) => {
   };
 };
 
-
 // Add users in api
-
 
 export const createUserStart = (users) => {
   return {
@@ -44,6 +40,29 @@ export const createUserSuccess = () => {
 export const createUserError = (error) => {
   return {
     type: types.CREATE_USER_ERROR,
+    payload: error,
+  };
+};
+
+// delete user start
+
+export const deleteUserStart = (id) => {
+  return {
+    type: types.DELETE_USER_START,
+    payload: id,
+  };
+};
+
+export const deleteUserSuccess = (user) => {
+  return {
+    type: types.DELETE_USER_SUCCESS,
+    payload: user
+  };
+};
+
+export const deleteUserError = (error) => {
+  return {
+    type: types.DELETE_USER_ERROR,
     payload: error,
   };
 };

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUserValidation } from "../schemas";
 import { v4 as uuidv4 } from "uuid";
-import { createUserStart,loadUserStart } from "../redux/action";
+import { createUserStart, loadUserStart } from "../redux/action";
+import { toast } from "react-toastify";
 
 const Addusers = ({ editUser }) => {
   const dispatch = useDispatch();
@@ -23,7 +24,10 @@ const Addusers = ({ editUser }) => {
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       dispatch(createUserStart(values));
-      dispatch(loadUserStart());
+      toast.success("User Added Successfully")
+      setTimeout(() => {
+        dispatch(loadUserStart());
+      }, 500);
 
       resetForm({
         values: {

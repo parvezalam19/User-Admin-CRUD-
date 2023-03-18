@@ -6,7 +6,12 @@ export const loadUsersApi = async () => {
 };
 
 export const createUsersApi = async (user) => {
-    console.log("api")
+  console.log("api");
   let res = await axios.post("http://localhost:5000/users", user);
+  return res;
+};
+
+export const deleteUsersApi = async (id) => {
+  let res = await axios.delete(`http://localhost:5000/users/${id}`);
   return res;
 };

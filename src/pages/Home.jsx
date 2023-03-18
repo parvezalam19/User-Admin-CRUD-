@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserStart } from "../redux/action";
+import { deleteUserStart, loadUserStart } from "../redux/action";
 import Addusers from "./Addusers";
 import Spinner from "react-bootstrap/Spinner";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { users, editUser, loading } = useSelector((state) => state.data);
+
   useEffect(() => {
     dispatch(loadUserStart());
-  },[]);
+  }, []);
 
-  const handleDelete = (index) => {
+  const handleDelete = (id) => {
     // dispatch(deleteUserData(index));
+    dispatch(deleteUserStart(id));
+    toast.success("User Deleted Successfully");
   };
   const handleEdit = (index) => {
     // dispatch(updateUserData(index));
@@ -37,11 +41,14 @@ const Home = () => {
             {loading ? (
               <tr>
                 <td colSpan="5" className="text-center">
-                <Spinner animation="border" variant="primary" />
+                  <Spinner animation="border" variant="primary" />
                 </td>
               </tr>
+            ) : users && users.length === 0 ? (
+              <td colSpan="5" className="text-center">
+                No user Data Found..
+              </td>
             ) : (
-              users &&
               users.map((user, i) => {
                 return (
                   <tr key={user.id}>

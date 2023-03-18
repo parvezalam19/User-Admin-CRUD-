@@ -1,19 +1,11 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "ce923a3a-9688-4118-9db3-a8248eaacd16",
       "name": "Parvez Alam",
-      "DOB": "1996/02/12",
-      "gender": "Male",
-      "Biodata": "Developer"
-    },
-    {
-      "id": 2,
-      "name": "Rahul",
-      "DOB": "1994/02/12",
-      "gender": "Male",
-      "Biodata": "Node Developer"
+      "DOB": "2023-03-09",
+      "gender": "female",
+      "Biodata": "i am a developer\n"
     }
-    
   ]
 }
