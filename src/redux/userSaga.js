@@ -16,8 +16,15 @@ import {
   createUserError,
   deleteUserSuccess,
   deleteUserError,
+  editUserSuccess,
+  editUserError,
 } from "./action";
-import { createUsersApi, deleteUsersApi, loadUsersApi } from "./api";
+import {
+  createUsersApi,
+  deleteUsersApi,
+  editUsersApi,
+  loadUsersApi,
+} from "./api";
 
 // Load users
 
@@ -76,7 +83,30 @@ export function* onDeleteUsers() {
   }
 }
 
-const userSagas = [fork(onLoadUsers), fork(onCreateUsers), fork(onDeleteUsers)];
+// Edit user data
+
+export function* onEditUserStartAsync({ payload }) {
+  try {
+    const response = yield call(editUsersApi, payload.userID, payload.userInfo);
+    if (response.status === 200) {
+      yield delay(500);
+      yield put(editUserSuccess());
+    }
+  } catch (error) {
+    yield put(editUserError(error.response.data));
+  }
+}
+
+export function* onEditUser() {
+  yield takeLatest(types.EDIT_USER_START, onEditUserStartAsync);
+}
+
+const userSagas = [
+  fork(onLoadUsers),
+  fork(onCreateUsers),
+  fork(onDeleteUsers),
+  fork(onEditUser),
+];
 
 export default function* rootSaga() {
   yield all([...userSagas]);

@@ -1,82 +1,89 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserStart, loadUserStart } from "../redux/action";
-import Addusers from "./Addusers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  deleteUserStart,
+  editUserStart,
+  loadUserStart,
+  takeEditObj,
+} from "../redux/action";
 import Spinner from "react-bootstrap/Spinner";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { users, editUser, loading } = useSelector((state) => state.data);
+  const navigate = useNavigate();
+  const { users, loading } = useSelector((state) => state.data);
 
   useEffect(() => {
     dispatch(loadUserStart());
   }, []);
 
   const handleDelete = (id) => {
-    // dispatch(deleteUserData(index));
     dispatch(deleteUserStart(id));
     toast.success("User Deleted Successfully");
   };
-  const handleEdit = (index) => {
-    // dispatch(updateUserData(index));
+  const handleEdit = (user, id) => {
+    dispatch(takeEditObj(user));
+    navigate(`/editUsers/${id}`);
   };
+
   return (
     <div className="row table_container">
-      <div className="col-sm-3">
-        <Addusers editUser={editUser} />
-      </div>
-      <div className="col-sm-7">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Date of Birth</th>
-              <th>Gender</th>
-              <th>BioData</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading ? (
+              <h3 className="text-center m-3">Users Details</h3>
+        <div className="col-sm-8">
+          <table>
+            <thead>
               <tr>
-                <td colSpan="5" className="text-center">
-                  <Spinner animation="border" variant="primary" />
-                </td>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>BioData</th>
+                <th>Action</th>
               </tr>
-            ) : users && users.length === 0 ? (
-              <td colSpan="5" className="text-center">
-                No user Data Found..
-              </td>
-            ) : (
-              users.map((user, i) => {
-                return (
-                  <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.DOB}</td>
-                    <td>{user.gender}</td>
-                    <td>{user.Biodata}</td>
-                    <td className="d-flex gap-2">
-                      <span
-                        className="text-primary font-weight-bold"
-                        onClick={() => handleEdit(user.id)}
-                      >
-                        Edit
-                      </span>
-                      <span
-                        className="text-danger font-weight-bold"
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        Delete
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                  </td>
+                </tr>
+              ) : users && users.length === 0 ? (
+                <td colSpan="5" className="text-center">
+                  No user Data Found..
+                </td>
+              ) : (
+                users.map((user, i) => {
+                  return (
+                    <tr key={user.id}>
+                      <td>{user.name}</td>
+                      <td>{user.DOB}</td>
+                      <td>{user.gender}</td>
+                      <td>{user.Biodata}</td>
+                      <td className="d-flex gap-2 edit justify-content-center">
+                        <button
+                          className="btn sm-btn btn-primary font-weight-bold"
+                          onClick={() => handleEdit(user, user.id)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn sm-btn btn-danger font-weight-bold delete"
+                          onClick={() => handleDelete(user.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
     </div>
   );
 };

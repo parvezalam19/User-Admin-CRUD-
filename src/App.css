@@ -17,15 +17,13 @@ ul li a:hover {
 /* home page */
 
 .table_container {
-  /* margin: auto;
-   */
   display: flex;
   justify-content: center;
   margin-top: 5%;
   width: 100%;
   padding: 10px;
 }
-table{
+table {
   width: 100%;
 }
 thead tr {
@@ -36,13 +34,9 @@ thead tr {
   font-weight: 300;
   border-bottom: 1px solid gray !important;
 }
-/* tbody {
-  border: 1px solid gray;
-  border-width: 1px !important;
-} */
 
 tbody tr {
-  /* margin-top: 10px; */
+  border: 1px solid lightblue;
   width: 100%;
   font-size: 15px;
   color: rgb(27, 81, 82);
@@ -76,6 +70,7 @@ table a {
 .form {
   border-radius: 20px;
   /* background-color: red; */
+  background-color: white;
   border: 1px solid gainsboro;
   text-align: center;
 }
@@ -85,7 +80,9 @@ table a {
   margin: 10px 0;
 }
 
-input ,textarea, select{
+input,
+textarea,
+select {
   background-color: rgb(243, 242, 242);
   outline: none;
   border: none;
@@ -95,20 +92,29 @@ input ,textarea, select{
   font-size: 12px;
 }
 
-label{
+label {
   color: rgb(20, 84, 84);
   font-weight: 600;
   margin-bottom: 5px;
 }
 
-input:focus ,textarea:focus, select:focus {
+input:focus,
+textarea:focus,
+select:focus {
   border: 1px solid rgb(159, 174, 240);
 }
 
-.error{
-color: red;
+.error {
+  color: red;
 }
 
-td span{
-  cursor: pointer;
+.banner {
+  width: 100%;
+}
+
+.banner {
+  background-image: url("https://img.freepik.com/free-vector/worldwide-connection-blue-background-illustration-vector_53876-61764.jpg?w=900&t=st=1679295095~exp=1679295695~hmac=ada9e7a02691ca749486ba07ba7a2ea4bb13f354d850a255e9450209a6ca31c0");
+  background-size: cover;
+  height: 90vh;
+  padding-top: 50px;
 }

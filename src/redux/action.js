@@ -56,7 +56,7 @@ export const deleteUserStart = (id) => {
 export const deleteUserSuccess = (user) => {
   return {
     type: types.DELETE_USER_SUCCESS,
-    payload: user
+    payload: user,
   };
 };
 
@@ -67,25 +67,31 @@ export const deleteUserError = (error) => {
   };
 };
 
-// export const addUserData = (data, id, type) => {
-//   console.log(data);
-//   return {
-//     type: types.ADD_USER_DATA,
-//     payload: { data, id, type },
-//   };
-// };
+// Edit Users Start
 
-// export const deleteUserData = (id) => {
-//   return {
-//     type: types.DELETE_USERS_DATA,
-//     payload: id,
-//   };
-// };
+export const editUserStart = ( userInfo , userID) => {
+  return {
+    type: types.EDIT_USER_START,
+    payload: {  userInfo ,userID},
+  };
+};
 
-// export const updateUserData = (id) => {
-//   console.log(id);
-//   return {
-//     type: types.UPDATE_USER_DATA,
-//     payload: id,
-//   };
-// };
+export const editUserSuccess = () => {
+  return {
+    type: types.EDIT_USER_SUCCESS,
+  };
+};
+
+export const editUserError = (error) => {
+  return {
+    type: types.EDIT_USER_ERROR,
+    payload: error,
+  };
+};
+
+export const takeEditObj = (data) => {
+  return {
+    type: types.GET_EDIT_DATA,
+    payload: data,
+  };
+};

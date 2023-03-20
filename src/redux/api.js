@@ -15,3 +15,8 @@ export const deleteUsersApi = async (id) => {
   let res = await axios.delete(`http://localhost:5000/users/${id}`);
   return res;
 };
+
+export const editUsersApi = async (id, userInfo) => {
+  let res = await axios.put(`http://localhost:5000/users/${id}`, userInfo);
+  return res;
+};
